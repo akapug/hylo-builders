@@ -22,6 +22,11 @@ config/ssl
 .env.test
 .env.dev
 .env.production
+.env.backup*
+*.env.backup*
+
+# archive folder
+archive/
 
 .floo
 .flooignore

@@ -23,7 +23,7 @@ export function getHost () {
   if (typeof window === 'undefined') {
     return process.env.API_HOST
   } else {
-    return window.location.origin
+    return import.meta.env.VITE_API_HOST || 'http://localhost:3001'
   }
 }
 
@@ -37,7 +37,7 @@ export function fetchJSON (path, params, options = {}) {
       'Content-Type': 'application/json',
       Cookie: options.cookie
     },
-    credentials: 'same-origin',
+    credentials: 'include', // Changed from 'same-origin' to 'include' for cross-origin requests
     body: method === 'post' ? JSON.stringify(params) : null
   }
   const processResults = (resp) => {

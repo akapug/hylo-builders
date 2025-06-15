@@ -59,7 +59,7 @@ module.exports.security = {
     *                                                                          *
     ***************************************************************************/
 
-    allowCredentials: false,
+    allowCredentials: true,
 
     /***************************************************************************
     *                                                                          *
@@ -68,7 +68,7 @@ module.exports.security = {
     *                                                                          *
     ***************************************************************************/
 
-    allowRequestMethods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD'
+    allowRequestMethods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
 
     /***************************************************************************
     *                                                                          *
@@ -77,6 +77,14 @@ module.exports.security = {
     *                                                                          *
     ***************************************************************************/
 
-    // allowRequestHeaders: 'content-type'
+    allowRequestHeaders: 'content-type,authorization',
+
+    /***************************************************************************
+    *                                                                          *
+    * Allow unsafe wildcard (*) with credentials - only for development       *
+    *                                                                          *
+    ***************************************************************************/
+    
+    allowAnyOriginWithCredentialsUnsafe: process.env.NODE_ENV !== 'production'
   }
 }

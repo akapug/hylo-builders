@@ -40,10 +40,14 @@ module.exports.session = {
   name: process.env.COOKIE_NAME, // cookie name, instead of sails.sid
 
   cookie: {
-    domain: process.env.COOKIE_DOMAIN,
+    // Use 'localhost' without port for local development to avoid cross-origin cookie issues
+    // If COOKIE_DOMAIN is not set, don't specify domain at all (better for localhost)
+    domain: process.env.COOKIE_DOMAIN && process.env.COOKIE_DOMAIN.includes(':') ? 'localhost' : process.env.COOKIE_DOMAIN,
     maxAge: 60 * 86400000, // 60 days
     secure: process.env.PROTOCOL === 'https',
-    sameSite: process.env.PROTOCOL === 'https' ? 'None' : 'Lax'
+    sameSite: process.env.PROTOCOL === 'https' ? 'None' : 'Lax',
+    // Ensure httpOnly is false for development to allow inspection
+    httpOnly: process.env.NODE_ENV === 'production'
   },
 
   /***************************************************************************
